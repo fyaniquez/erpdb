@@ -1,0 +1,2 @@
+class Vendido < Detalle
+end

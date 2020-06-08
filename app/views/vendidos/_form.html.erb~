@@ -1,0 +1,42 @@
+<%= form_with(model: vendido, local: true) do |form| %>
+  <% if vendido.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(vendido.errors.count, "error") %> prohibited this vendido from being saved:</h2>
+
+      <ul>
+        <% vendido.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+    <% end %>
+    
+  <div class="field">
+    <%= form.label :transaccion_id %>
+    <%= form.collection_select :transaccion_id, Inventario.all, :id, :glosa %>
+  </div>
+  
+  <div class="field">
+    <%= form.label :producto_id %>
+    <%= form.collection_select :producto_id, Producto.all, :id, :nombre %>
+  </div>
+
+  <div class="field">
+    <%= form.label :precio %>
+    <%= form.text_field :precio %>
+  </div>
+
+  <div class="field">
+    <%= form.label :cantidad %>
+    <%= form.text_field :cantidad %>
+  </div>
+
+  <div class="field">
+    <%= form.label :total %>
+    <%= form.text_field :total %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

@@ -1,0 +1,35 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Detalle Inventarios</h1>
+<%= link_to 'New Detalle Inventario', new_inventariado_path %>
+
+<table>
+  <thead>
+    <tr>
+      <th>Inventario</th>
+      <th>Producto</th>
+      <th>Precio</th>
+      <th>Cantidad</th>
+      <th>Total</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @inventariados.each do |inventariado| %>
+      <tr>
+      <td><%= inventariado.transaccion.id %></td>
+      <td><%= inventariado.producto.nombre %></td>
+      <td><%= inventariado.precio %></td>
+      <td><%= inventariado.cantidad %></td>
+      <td><%= inventariado.total %></td>
+        <td><%= link_to 'Show', inventariado %></td>
+        <td><%= link_to 'Edit', edit_inventariado_path(inventariado) %></td>
+        <td><%= link_to 'Destroy', inventariado, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+

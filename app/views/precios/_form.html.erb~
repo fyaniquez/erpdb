@@ -1,0 +1,48 @@
+<%= form_with(model: precio, local: true) do |form| %>
+  <% if precio.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(precio.errors.count, "error") %> prohibited this precio from being saved:</h2>
+
+      <ul>
+        <% precio.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+    <% end %>
+    
+  <div class="field">
+    <%= form.label :producto_id %>
+    <%= form.collection_select :producto_id, @productos, :id, :categoria.nombre %>
+  </div>
+  
+  <div class="field">
+    <%= form.label :almacen_id %>
+    <%= form.collection_select :almacen_id, Almacen.all, :id, :nombre %>    
+  </div>
+  <div class="field">
+    <%= form.label :por %>
+        <%= form.select :por, options_for_select(@pors) %>
+
+  </div>
+  <div class="field">
+    <%= form.label :prc %>
+    <%= form.text_field :prc %>
+  </div>
+  <div class="field">
+    <%= form.label :cantidad %>
+    <%= form.text_field :cantidad %>
+  </div>
+  <div class="field">
+    <%= form.label :barras %>
+    <%= form.text_field :barras %>
+  </div>
+  <div class="field">
+    <%= form.label :orden %>
+    <%= form.text_field :orden %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

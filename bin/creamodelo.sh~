@@ -1,0 +1,12 @@
+rails g model pais nombre:string{50}:uniq:index iso2:string{2}:uniq
+rails g model persona nombre:string{50}:index:uniq documento:string{20}:index:uniq
+rails g model usuario persona:references identificacion:string:unique password:digest externo:string{255} estado:string{20}
+rails g model empresa persona:references pais:references nit:string{20}
+rails g model marca nombre:string{30}:uniq empresa:references estado:string{20}
+rails g model capitulo nombre:string{30}:index:uniq
+rails g model categoria capitulo:references nombre:string{30}
+rails g model producto usuario:references marca:references categoria:references nombre:string{30}:index:uniq unidad:string{5}
+rails g model almacen estado:string{20}
+rails g model transaccion type usuario:references almacen:references fecha:datetime objeto:integer glosa:string{255} estado:string{20}
+rails g model detalle type transaccion:references producto:references precio:integer cantidad:integer bonificacion:integer descuento:integer total:integer
+rails g model precio producto:references almacen:references por:string{30} prc:integer cantidad:integer barras:string{20} orden:integer

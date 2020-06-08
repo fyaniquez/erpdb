@@ -1,0 +1,2 @@
+class Almacen < ApplicationRecord
+end

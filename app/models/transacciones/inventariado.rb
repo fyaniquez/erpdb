@@ -1,0 +1,2 @@
+class Inventariado < Detalle
+end

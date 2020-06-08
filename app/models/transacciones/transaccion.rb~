@@ -1,0 +1,5 @@
+class Transaccion < ApplicationRecord
+  has_many :detalles
+  belongs_to :usuario
+  belongs_to :almacen
+end

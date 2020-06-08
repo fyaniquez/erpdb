@@ -1,0 +1,19 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  type: 
+  usuario: one
+  almacen: one
+  fecha: 2020-01-18 19:42:01
+  objeto: 1
+  glosa: MyString
+  estado: MyString
+
+two:
+  type: 
+  usuario: two
+  almacen: two
+  fecha: 2020-01-18 19:42:01
+  objeto: 1
+  glosa: MyString
+  estado: MyString

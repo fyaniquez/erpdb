@@ -1,0 +1,46 @@
+<%= form_with(model: venta, local: true) do |form| %>
+  <% if venta.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(venta.errors.count, "error") %> prohibited this venta from being saved:</h2>
+
+      <ul>
+        <% venta.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+    <% end %>
+    
+  <div class="field">
+    <%= form.label :almacen_id %>
+    <%= form.collection_select :almacen_id, Almacen.all, :id, :nombre %>
+  </div>
+  
+  <div class="field">
+    <%= form.label :fecha %>
+    <%= form.text_field :fecha %>
+  </div>
+
+  <div class="field">
+    <%= form.label :objeto %>
+    <%= form.text_field :objeto %>
+  </div>
+
+  <div class="field">
+    <%= form.label :glosa %>
+    <%= form.text_field :glosa %>
+  </div>
+
+  <div class="field">
+    <%= form.label :estado %>
+    <%= form.text_field :estado %>
+  </div>
+
+  <div class="panel-body" id="vendidos">
+    <%= (@venta.detalle.count > 0) ? render(partial: 'table', locals: {venta: @venta, show_actions: true }) : 'No hay detalles cargados' %>
+  </div>
+ <%= link_to "Nuevo detalle", new_venta_detalle_path(transaccion_id: @venta.id), remote: true, class: "btn btn-info" %>
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>
