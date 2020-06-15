@@ -1,0 +1,19 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  producto: one
+  almacen: one
+  por: MyString
+  prc: 1
+  cantidad: 1
+  barras: MyString
+  orden: 1
+
+two:
+  producto: two
+  almacen: two
+  por: MyString
+  prc: 1
+  cantidad: 1
+  barras: MyString
+  orden: 1

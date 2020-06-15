@@ -1,0 +1,41 @@
+<%= form_with(model: empresa, local: true) do |form| %>
+  <% if empresa.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(empresa.errors.count, "error") %> prohibited this empresa from being saved:</h2>
+
+      <ul>
+        <% empresa.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :pais_id %>
+    <%= form.select(:pais_id) do %>
+      <% @paises.each do |pais| %>
+        <%= content_tag(:option, pais.nombre, value: pais.id) %>
+      <% end %>
+    <% end %>
+  </div>
+  
+  <div class="field">
+    <%= form.label :persona_id %>
+    <%= form.select(:persona_id) do %>
+      <% @personas.each do |persona| %>
+        <%= content_tag(:option, persona.nombre, value: persona.id) %>
+      <% end %>
+    <% end %>
+  </div>
+
+  <div class="field">
+    <%= form.label :nit %>
+    <%= form.text_field :nit %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>
+  
