@@ -37,10 +37,14 @@
   </div>
 
   <div class="panel-body" id="vendidos">
-    <%= (@vendidos.count > 0) ? render(partial: 'vendidos', locals: {venta: @venta, show_actions: true }) : 'No hay detalles cargados' %>
+    <%= (@venta.detalles.count > 0) ? render(partial: 'vendidos', locals: {venta: @venta, show_actions: true }) : 'No hay detalles cargados' %>
   </div>
  <%= link_to "Nuevo detalle", new_vendido_path(transaccion_id: @venta.id), remote: true, class: "btn btn-info" %>
   <div class="actions">
     <%= form.submit %>
   </div>
+  <script language="javascript">
+    var p = {<%= @productos %>}
+    alert (p[0])
+  </script>
 <% end %>

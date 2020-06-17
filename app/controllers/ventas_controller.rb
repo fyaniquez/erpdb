@@ -21,7 +21,10 @@ class VentasController < ApplicationController
 
   # GET /ventas/1/edit
   def edit
-    @vendidos = @venta.detalles
+    sql = "select id, nombre, prc from productos"
+    prods = ActiveRecord::Base.connection.execute(sql)
+    @productos = prods.values.to_s.gsub(/^./, "").gsub(/.$/,"").gsub(/[\[\]]/, "'")
+    #@productos = prods.values.to_s
   end
 
   # POST /ventas

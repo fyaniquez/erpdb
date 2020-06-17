@@ -15,7 +15,7 @@
   </thead>
 
   <tbody>
-    <% @vendidos.each do |vendido| %>
+    <% @venta.detalles.each do |vendido| %>
       <tr>
       <td><%= vendido.producto.nombre %></td>
       <td><%= vendido.precio %></td>
