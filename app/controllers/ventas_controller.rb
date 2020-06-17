@@ -23,8 +23,9 @@ class VentasController < ApplicationController
   def edit
     sql = "select id, nombre, prc from productos"
     prods = ActiveRecord::Base.connection.execute(sql)
-    @productos = prods.values.to_s.gsub(/^./, "").gsub(/.$/,"").gsub(/[\[\]]/, "'")
-    #@productos = prods.values.to_s
+    @productos = prods.values.to_s.html_safe
+    @nonce = nonce
+    response.set_header('Content-Security-Police',"script-src 'unsafe-inline' 'nonce-" + @nonce + "'")
   end
 
   # POST /ventas
@@ -77,6 +78,10 @@ class VentasController < ApplicationController
     def venta_params
       params.permit!
       params.fetch(:venta, {})
+    end
+
+    def nonce
+     rand(10 ** 30).to_s.rjust(30,'0')
     end
 
 end
