@@ -1,7 +1,6 @@
-  <script nonce='<%= @nonce %>'>
-    var p = <%= @productos %>
-    alert (p[0])
-  </script>
+<script>
+var p = <%= @productos %>
+</script>
 <%= form_with(model: venta, local: true) do |form| %>
   <% if venta.errors.any? %>
     <div id="error_explanation">

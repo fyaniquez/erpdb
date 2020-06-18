@@ -1,5 +1,6 @@
 class VentasController < ApplicationController
   before_action :set_venta, only: [:show, :edit, :update, :destroy]
+  skip_before_action :verify_authenticity_token
 
   # GET /ventas
   # GET /ventas.json
@@ -24,8 +25,12 @@ class VentasController < ApplicationController
     sql = "select id, nombre, prc from productos"
     prods = ActiveRecord::Base.connection.execute(sql)
     @productos = prods.values.to_s.html_safe
-    @nonce = nonce
-    response.set_header('Content-Security-Police',"script-src 'unsafe-inline' 'nonce-" + @nonce + "'")
+    headers['Content-Security-Police'] = "default-src 'unsafe-inline' 'self'"
+    #@nonce = nonce
+    #politica = "script-src 'unsafe-inline' 'nonce-" + @nonce + "'"
+    
+    #politica = "script-src 'unsafe-inline'"
+    #response.set_header('Content-Security-Police', politica)
   end
 
   # POST /ventas
