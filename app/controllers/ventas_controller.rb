@@ -1,6 +1,5 @@
 class VentasController < ApplicationController
   before_action :set_venta, only: [:show, :edit, :update, :destroy]
-  skip_before_action :verify_authenticity_token
 
   # GET /ventas
   # GET /ventas.json
@@ -22,15 +21,8 @@ class VentasController < ApplicationController
 
   # GET /ventas/1/edit
   def edit
-    sql = "select id, nombre, prc from productos"
-    prods = ActiveRecord::Base.connection.execute(sql)
-    @productos = prods.values.to_s.html_safe
-    headers['Content-Security-Police'] = "default-src 'unsafe-inline' 'self'"
-    #@nonce = nonce
-    #politica = "script-src 'unsafe-inline' 'nonce-" + @nonce + "'"
-    
-    #politica = "script-src 'unsafe-inline'"
-    #response.set_header('Content-Security-Police', politica)
+    sqlProductosPrecios = "select "
+    @productos = Producto.all
   end
 
   # POST /ventas
@@ -83,10 +75,6 @@ class VentasController < ApplicationController
     def venta_params
       params.permit!
       params.fetch(:venta, {})
-    end
-
-    def nonce
-     rand(10 ** 30).to_s.rjust(30,'0')
     end
 
 end

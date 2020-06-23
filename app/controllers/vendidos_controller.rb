@@ -19,6 +19,7 @@ class VendidosController < ApplicationController
 
   # GET /vendidos/1/edit
   def edit
+    @productos = Producto.all.collect {|p| [p.nombre, {prc: p.prc}, p.id]}
   end
 
   # POST /vendidos

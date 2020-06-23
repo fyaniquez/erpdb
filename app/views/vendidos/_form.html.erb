@@ -18,12 +18,12 @@
   
   <div class="field">
     <%= form.label :producto_id %>
-    <%= form.collection_select :producto_id, Producto.all, :id, :nombre %>
+    <%= form.select :producto_id, options_for_select(@productos, @vendido.producto_id) %>
   </div>
 
   <div class="field">
     <%= form.label :precio %>
-    <%= form.text_field :precio %>
+    <%= form.text_field :precio%>
   </div>
 
   <div class="field">
@@ -40,3 +40,4 @@
     <%= form.submit %>
   </div>
 <% end %>
+<%= javascript_pack_tag 'vendido'%>
