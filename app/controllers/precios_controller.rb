@@ -79,4 +79,12 @@ class PreciosController < ApplicationController
     def pors_lista
       [["único", "único"], ["unidad", "unidad"], ["docena", "docena"], ["caja", "caja"], ["tira", "tira"], ["5-19", "5-19"], ["20-50", "20-50"], ["paquete", "paq"], ["suelto", "suelto"], ["bolsa", "bolsa"]]
     end
+
+    def valoresPor100
+      @precio.precio *= 100
+    end
+
+    def valoresEntre100
+      @precio.precio /= 100
+    end
 end

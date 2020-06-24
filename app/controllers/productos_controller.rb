@@ -78,4 +78,12 @@ class ProductosController < ApplicationController
     def unidades_lista
       [["unidad", "u"], ["paquete", "paq."],["litro", "Lt"], ["Botella", "bot"], ["Pieza", "pza"],["sachet", "sach"],["Hojas", "h"], ["Bolivianos", "Bs."]]
     end
+
+    def valoresPor100
+      @producto.precio *= 100
+    end
+
+    def valoresEntre100
+      @producto.precio /= 100
+    end
 end

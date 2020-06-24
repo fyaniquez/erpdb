@@ -10,7 +10,6 @@ class VendidosController < ApplicationController
   # GET /vendidos/1
   # GET /vendidos/1.json
   def show
-    valoresEntre100
   end
 
   # GET /vendidos/new
@@ -28,7 +27,6 @@ class VendidosController < ApplicationController
   # POST /vendidos.json
   def create
     @vendido = Vendido.new(vendido_params)
-    valoresPor100
     respond_to do |format|
       if @vendido.save
         format.html { redirect_to @vendido, notice: 'Vendido was successfully created.' }
@@ -43,7 +41,6 @@ class VendidosController < ApplicationController
   # PATCH/PUT /vendidos/1
   # PATCH/PUT /vendidos/1.json
   def update
-    valoresPor100
     respond_to do |format|
       if @vendido.update(vendido_params)
         format.html { redirect_to @vendido, notice: 'Vendido was successfully updated.' }
@@ -82,16 +79,6 @@ class VendidosController < ApplicationController
     end
 
     def productos_lista
-      Producto.order(:nombre).collect {|p| [p.nombre, {prc: p.prc}, p.id]}
-    end
-    def valoresPor100
-      @vendido.precio *= 100
-      @vendido.cantidad *= 100
-      @vendido.total * = 100
-    end
-    def valoresEntre100
-      @vendido.precio /= 100
-      @vendido.cantidad /= 100
-      @vendido.total /= 100
+      Producto.order(:nombre).collect {|p| [p.nombre, {precio: p.precio}, p.id]}
     end
 end
