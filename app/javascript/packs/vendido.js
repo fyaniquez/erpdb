@@ -18,7 +18,7 @@ function calcular() {
 }
 function actualizar() {
     let prd = event.target;
-    let prc = +prd.options[prd.selectedIndex].getAttribute("prc") / 100;        
+    let prc = +prd.options[prd.selectedIndex].getAttribute("prc");        
     form.vendido_precio.value = prc;
     form.vendido_cantidad.value = 1;
     form.vendido_total.value = prc;
