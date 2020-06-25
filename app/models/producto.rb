@@ -3,9 +3,9 @@ class Producto < ApplicationRecord
   belongs_to :usuario
   belongs_to :categoria
   def precio
-    super / DECIMALES
+    super.to_f / DECIMALES
   end
   def precio=(value)
-    super(value * DECIMALES)
+    super(value.to_f * DECIMALES)
   end
 end

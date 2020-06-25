@@ -15,6 +15,7 @@
   </thead>
 
   <tbody>
+    <% total = 0.0 %>
     <% @venta.detalles.each do |vendido| %>
       <tr>
       <td><%= vendido.producto.nombre %></td>
@@ -25,8 +26,14 @@
         <td><%= link_to 'Edit', edit_vendido_path(vendido) %></td>
         <td><%= link_to 'Destroy', vendido, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
-    <% end %>
+    <% total += vendido.total; end %>
   </tbody>
+  <tfoot>
+    <tr>
+      <td colspan="3">TOTAL</td>
+      <td><%= total %></td>
+    </tr>
+  </tfoot>
 </table>
 
 <br>
