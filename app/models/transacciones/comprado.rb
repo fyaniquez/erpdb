@@ -1,0 +1,2 @@
+class Comprado < Detalle
+end

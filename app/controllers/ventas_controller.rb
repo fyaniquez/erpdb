@@ -21,7 +21,6 @@ class VentasController < ApplicationController
 
   # GET /ventas/1/edit
   def edit
-    sqlProductosPrecios = "select "
     @productos = Producto.all
   end
 

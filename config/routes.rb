@@ -9,6 +9,8 @@ Rails.application.routes.draw do
   resources :inventariados
   resources :ventas
   resources :vendidos
+  resources :compras
+  resources :comprados
   resources :precios
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end

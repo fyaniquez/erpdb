@@ -1,10 +1,10 @@
-<%= form_with(model: vendido, local: true) do |form| %>
-  <% if vendido.errors.any? %>
+<%= form_with(model: comprado, local: true) do |form| %>
+  <% if comprado.errors.any? %>
     <div id="error_explanation">
-      <h2><%= pluralize(vendido.errors.count, "error") %> prohibited this vendido from being saved:</h2>
+      <h2><%= pluralize(comprado.errors.count, "error") %> prohibited this comprado from being saved:</h2>
 
       <ul>
-        <% vendido.errors.full_messages.each do |message| %>
+        <% comprado.errors.full_messages.each do |message| %>
           <li><%= message %></li>
         <% end %>
       </ul>
@@ -13,12 +13,12 @@
     
   <div class="field">
     <%= form.label :transaccion_id %>
-    <%= form.collection_select :transaccion_id, Venta.all, :id, :glosa %>
+    <%= form.collection_select :transaccion_id, Compra.all, :id, :glosa %>
   </div>
   
   <div class="field">
     <%= form.label :producto_id %>
-    <%= form.select :producto_id, options_for_select(@productos, @vendido.producto_id) %>
+    <%= form.select :producto_id, options_for_select(@productos, @comprado.producto_id) %>
   </div>
 
   <div class="field">
@@ -40,5 +40,4 @@
     <%= form.submit %>
   </div>
 <% end %>
-<%= javascript_pack_tag 'vendido'%>
-<%= javascript_pack_tag 'detalle'%>
+<%= javascript_pack_tag 'comprado'%>

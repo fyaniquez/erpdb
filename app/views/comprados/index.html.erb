@@ -1,0 +1,35 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Detalle Incomprarios</h1>
+<%= link_to 'New Detalle Incomprario', new_comprado_path %>
+
+<table>
+  <thead>
+    <tr>
+      <th>Incomprario</th>
+      <th>Producto</th>
+      <th>Precio</th>
+      <th>Cantidad</th>
+      <th>Total</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @comprados.each do |comprado| %>
+      <tr>
+      <td><%= comprado.transaccion.id %></td>
+      <td><%= comprado.producto.nombre %></td>
+      <td><%= comprado.precio %></td>
+      <td><%= comprado.cantidad %></td>
+      <td><%= comprado.total %></td>
+        <td><%= link_to 'Show', comprado %></td>
+        <td><%= link_to 'Edit', edit_comprado_path(comprado) %></td>
+        <td><%= link_to 'Destroy', comprado, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
