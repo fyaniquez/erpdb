@@ -1,4 +1,5 @@
 class InventariosController < ApplicationController
+  before_action :authenticate_user!
   before_action :set_inventario, only: [:show, :edit, :update, :destroy]
 
   # GET /inventarios

@@ -1,4 +1,5 @@
 class CompradosController < ApplicationController
+  before_action :authenticate_user!
   before_action :set_comprado, only: [:show, :edit, :update, :destroy]
 
   # GET /comprados

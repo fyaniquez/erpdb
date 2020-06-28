@@ -1,4 +1,5 @@
 class CapitulosController < ApplicationController
+  before_action :authenticate_user!
   before_action :set_capitulo, only: [:show, :edit, :update, :destroy]
 
   # GET /capitulos

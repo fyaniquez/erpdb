@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_01_23_232238) do
+ActiveRecord::Schema.define(version: 2020_06_27_000449) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -50,16 +50,6 @@ ActiveRecord::Schema.define(version: 2020_01_23_232238) do
     t.index ["transaccion_id"], name: "index_detalles_on_transaccion_id"
   end
 
-  create_table "empresa", force: :cascade do |t|
-    t.bigint "persona_id", null: false
-    t.bigint "pais_id", null: false
-    t.string "nit", limit: 20
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["pais_id"], name: "index_empresa_on_pais_id"
-    t.index ["persona_id"], name: "index_empresa_on_persona_id"
-  end
-
   create_table "empresas", force: :cascade do |t|
     t.bigint "persona_id", null: false
     t.bigint "pais_id", null: false
@@ -73,9 +63,9 @@ ActiveRecord::Schema.define(version: 2020_01_23_232238) do
   create_table "marcas", force: :cascade do |t|
     t.string "nombre", limit: 30
     t.bigint "empresa_id", null: false
-    t.string "estado", limit: 20
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "activa", limit: 2, default: "si", null: false
     t.index ["empresa_id"], name: "index_marcas_on_empresa_id"
     t.index ["nombre"], name: "index_marcas_on_nombre", unique: true
   end
@@ -89,10 +79,8 @@ ActiveRecord::Schema.define(version: 2020_01_23_232238) do
 
   create_table "personas", force: :cascade do |t|
     t.string "nombre", limit: 50
-    t.string "documento", limit: 20
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["documento"], name: "index_personas_on_documento", unique: true
     t.index ["nombre"], name: "index_personas_on_nombre", unique: true
   end
 
@@ -106,18 +94,20 @@ ActiveRecord::Schema.define(version: 2020_01_23_232238) do
     t.integer "orden"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.text "defecto", default: "N", null: false, comment: "precio por defecto del producto"
     t.index ["almacen_id"], name: "index_precios_on_almacen_id"
     t.index ["producto_id"], name: "index_precios_on_producto_id"
   end
 
   create_table "productos", force: :cascade do |t|
-    t.bigint "usuario_id", null: false
+    t.bigint "usuario_id", default: 1, null: false
     t.bigint "marca_id", null: false
     t.bigint "categoria_id", null: false
     t.string "nombre", limit: 30
     t.string "unidad", limit: 5
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.integer "precio", default: 0, null: false, comment: "precio por defecto unitario del producto"
     t.index ["categoria_id"], name: "index_productos_on_categoria_id"
     t.index ["marca_id"], name: "index_productos_on_marca_id"
     t.index ["nombre"], name: "index_productos_on_nombre"
@@ -138,6 +128,18 @@ ActiveRecord::Schema.define(version: 2020_01_23_232238) do
     t.index ["usuario_id"], name: "index_transacciones_on_usuario_id"
   end
 
+  create_table "users", force: :cascade do |t|
+    t.string "email", default: "", null: false
+    t.string "encrypted_password", default: "", null: false
+    t.string "reset_password_token"
+    t.datetime "reset_password_sent_at"
+    t.datetime "remember_created_at"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["email"], name: "index_users_on_email", unique: true
+    t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
+  end
+
   create_table "usuarios", force: :cascade do |t|
     t.bigint "persona_id", null: false
     t.string "identificacion"
@@ -149,14 +151,14 @@ ActiveRecord::Schema.define(version: 2020_01_23_232238) do
     t.index ["persona_id"], name: "index_usuarios_on_persona_id"
   end
 
+# Could not dump table "ventas" because of following StandardError
+#   Unknown type 'time with time zone' for column 'fecha'
+
   add_foreign_key "categorias", "capitulos"
   add_foreign_key "detalles", "productos"
   add_foreign_key "detalles", "transacciones"
-  add_foreign_key "empresa", "paises"
-  add_foreign_key "empresa", "personas"
   add_foreign_key "empresas", "paises"
   add_foreign_key "empresas", "personas"
-  add_foreign_key "marcas", "empresa"
   add_foreign_key "precios", "almacenes"
   add_foreign_key "precios", "productos"
   add_foreign_key "productos", "categorias"

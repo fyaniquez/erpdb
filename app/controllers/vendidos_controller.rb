@@ -1,4 +1,5 @@
 class VendidosController < ApplicationController
+  before_action :authenticate_user!
   before_action :set_vendido, only: [:show, :edit, :update, :destroy]
 
   # GET /vendidos

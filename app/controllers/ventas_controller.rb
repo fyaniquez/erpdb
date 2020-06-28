@@ -1,4 +1,5 @@
 class VentasController < ApplicationController
+  before_action :authenticate_user!
   before_action :set_venta, only: [:show, :edit, :update, :destroy]
 
   # GET /ventas

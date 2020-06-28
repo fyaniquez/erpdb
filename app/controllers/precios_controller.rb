@@ -1,5 +1,6 @@
 # coding: utf-8
 class PreciosController < ApplicationController
+  before_action :authenticate_user!
   before_action :set_precio, only: [:show, :edit, :update, :destroy]
 
   # GET /precios
