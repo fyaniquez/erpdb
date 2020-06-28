@@ -29,6 +29,8 @@ gem 'bcrypt', '~> 3.1.7'
 gem 'bootsnap', '>= 1.4.2', require: false
 # authenticacion
 gem 'devise'
+gem 'cancancan'
+gem 'rolify'
 gem 'bootstrap', '~> 4.0.0.alpha3.1'
 gem 'jquery-rails'
 

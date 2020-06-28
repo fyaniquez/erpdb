@@ -1,31 +1,31 @@
-<p id="notice"><%= notice %></p>
-
+<%= flash_messages %>
 <h1>Ventas</h1>
-<%= link_to 'New Venta', new_venta_path %>
-
-<table>
+<%= link_to 'New Venta', new_venta_path, class: "btn btn-primary" %>
+<div class="venta-block">
+<table class="table table-striped table-bordered table-hover">
   <thead>
     <tr>
-      <th>Almacen</th>
-      <th>Fecha</th>
-      <th>Objeto</th>
-      <th>Glosa</th>
-      <th>Estado</th>
-      <th colspan="3"></th>
+      <th class="col-md-2">Almacen</th>
+      <th class="col-md-2">Fecha</th>
+      <th class="col-md-2">Objeto</th>
+      <th class="col-md-2">Glosa</th>
+      <th class="col-md-2">Estado</th>
+      <th class="col-md-4">Options</th>
     </tr>
   </thead>
 
   <tbody>
     <% @ventas.each do |venta| %>
       <tr>
-      <td><%= venta.almacen.nombre %></td>
-      <td><%= venta.fecha %></td>
-      <td><%= venta.objeto %></td>
-      <td><%= venta.glosa %></td>
-      <td><%= venta.estado %></td>
-        <td><%= link_to 'Show', venta %></td>
-        <td><%= link_to 'Edit', edit_venta_path(venta) %></td>
-        <td><%= link_to 'Destroy', venta, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      <td class="col-md-2"><%= venta.almacen.nombre %></td>
+      <td class="col-md-2"><%= venta.fecha %></td>
+      <td class="col-md-2"><%= venta.objeto %></td>
+      <td class="col-md-2"><%= venta.glosa %></td>
+      <td class="col-md-2"><%= venta.estado %></td>
+      <td class="col-md-4">
+        <%= link_to 'Show', venta, class: "btn btn-info" %>
+        <%= link_to 'Edit', edit_venta_path(venta), class: "btn btn-warning" %>
+        <%= link_to 'Destroy', venta, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger" %>
       </tr>
     <% end %>
   </tbody>

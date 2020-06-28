@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  root 'ventas#index'
+  root 'erpdb#index'
   devise_for :users
   resources :productos
   resources :categorias
