@@ -1,0 +1,35 @@
+<%= flash_messages %>
+<h1>Ventas</h1>
+<%= link_to 'Nueva factura', new_factura_path, class: "btn btn-primary" %>
+<div class="factura-block">
+<table class="table table-striped table-bordered table-hover">
+  <thead>
+    <tr>
+      <th class="col-md-2">Almacen</th>
+      <th class="col-md-2">Fecha</th>
+      <th class="col-md-2">Objeto</th>
+      <th class="col-md-2">Glosa</th>
+      <th class="col-md-2">Estado</th>
+      <th class="col-md-4">Options</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @facturas.each do |factura| %>
+      <tr>
+      <td class="col-md-2"><%= factura.almacen.nombre %></td>
+      <td class="col-md-2"><%= factura.fecha %></td>
+      <td class="col-md-2"><%= factura.objeto %></td>
+      <td class="col-md-2"><%= factura.glosa %></td>
+      <td class="col-md-2"><%= factura.estado %></td>
+      <td class="col-md-4">
+        <%= link_to 'Show', factura, class: "btn btn-info" %>
+        <%= link_to 'Edit', edit_factura_path(factura), class: "btn btn-warning" %>
+        <%= link_to 'Destroy', factura, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger" %>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+

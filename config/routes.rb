@@ -15,4 +15,5 @@ Rails.application.routes.draw do
   resources :comprados
   resources :precios
   resources :user
+  resources :facturas
 end
