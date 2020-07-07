@@ -35,7 +35,24 @@
     <%= form.label :estado %>
     <%= form.text_field :estado %>
   </div>
+  <ul>
+    <%= form.fields_for :detalles do |detalles_form| %>
+  <li>
+    <%= detalles_form.label :precio %>
+    <%= detalles_form.text_field :precio%>
+  </li>
 
+  <li>
+    <%= detalles_form.label :cantidad %>
+    <%= detalles_form.text_field :cantidad %>
+  </li>
+
+  <li>
+    <%= detalles_form.label :total %>
+    <%= detalles_form.text_field :total %>
+  </li>
+    <% end %>
+  </ul>
   <div class="panel-body" id="vendidos">
     <%= (@venta.detalles.count > 0) ? render(partial: 'vendidos', locals: {venta: @venta, show_actions: true }) : 'No hay detalles cargados' %>
   </div>

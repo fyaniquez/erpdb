@@ -15,9 +15,7 @@ class VentasController < ApplicationController
 
   # GET /ventas/new
   def new
-    @venta = Venta.create(estado: "creando", usuario_id: 1)
-    #@venta.detalle.build
-    #params[:venta_id] = @venta.id.to_s
+    @venta = Venta.create(estado: "creando", usuario_id: current_user.id)
   end
 
   # GET /ventas/1/edit
@@ -29,7 +27,7 @@ class VentasController < ApplicationController
   # POST /ventas.json
   def create
     @venta = Venta.new(venta_params)
-    @venta.usuario_id = 1
+    @venta.usuario_id = current_user.id
     respond_to do |format|
       if @venta.save
         format.html { redirect_to @venta, notice: 'Venta was successfully created.' }
@@ -74,7 +72,8 @@ class VentasController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def venta_params
       params.permit!
-      params.fetch(:venta, {})
+      #params.fetch(:venta, {})
+      params.require(:venta).permit(:objeto, :glosa, :fecha, detalles_attributes: [:id, :producto_id, :precio, :cantidad, :total])
     end
 
 end

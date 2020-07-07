@@ -1,6 +1,6 @@
 <%= form_with(model: @factura, local: true) do |form| %>
-  <div class="actions">
-    <%= form.submit %>
+  <div class="actions text-right">
+    <%= form.submit class: "btn btn-primary" %>
   </div>
   <% if @factura.errors.any? %>
     <div id="error_explanation">
@@ -13,32 +13,41 @@
     </div>
     <% end %>
     
-  <div class="field">
-    <%= form.label :almacen_id %>
-    <%= form.collection_select :almacen_id, Almacen.all, :id, :nombre %>
+  <div class="form-group row">
+    <%= form.label :objeto, class: "col-sm-2 col-form-label" %>
+    <div class="col-sm-10">
+      <%= form.text_field :objeto, class: "form-control form-control-sm" %>
+    </div>    
   </div>
-  
-  <div class="field">
-    <%= form.label :fecha %>
-    <%= form.text_field :fecha %>
-  </div>
+  <% end %>
+  <%= form_with(model: @vendido, local: true) do |f| %>
+      <div class="container">
+  <div class="row no-gutter">
+      <div class="col-5">
+	<%= f.label :producto_id %></div>
+      <div class="col">
+	<%= f.label :precio%></div>
+      <div class="col">
+	<%= f.label :cantidad %></div>
+      <div class="col">
+	<%= f.label :total %></div>
+    </div>
 
-  <div class="field">
-    <%= form.label :objeto %>
-    <%= form.text_field :objeto %>
-  </div>
-
-  <div class="field">
-    <%= form.label :glosa %>
-    <%= form.text_field :glosa %>
-  </div>
-
-  <div class="field">
-    <%= form.label :estado %>
-    <%= form.text_field :estado %>
+      <div class="row no-gutter">
+	<div class="col-5">
+	  <%= f.select :producto_id, options_for_select(@productos, @vendido.producto_id), class: "form-control" %></div>
+	<div class="col">
+	  <%= f.text_field :precio, class: "form-control" %></div>
+	<div class="col">
+	  <%= f.text_field :cantidad, class: "form-control" %></div>
+	<div class="col">
+	  <%= f.text_field :total, class: "form-control" %></div>
+      </div>
+    </div>    
+  <div class="text-center">
+    <%= f.submit class: "btn btn-secondary"%>
   </div>
 <% end %>
-
   <div class="panel-body" id="vendidos">
     <%= (@factura.detalles.count > 0) ? render(partial: 'vendidos', locals: {venta: @venta, show_actions: true }) : 'No hay detalles cargados' %>
   </div>
