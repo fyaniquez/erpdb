@@ -19,36 +19,25 @@
       <%= form.text_field :objeto, class: "form-control form-control-sm" %>
     </div>    
   </div>
-  <% end %>
-  <%= form_with(model: @vendido, local: true) do |f| %>
-      <div class="container">
-  <div class="row no-gutter">
-      <div class="col-5">
-	<%= f.label :producto_id %></div>
-      <div class="col">
-	<%= f.label :precio%></div>
-      <div class="col">
-	<%= f.label :cantidad %></div>
-      <div class="col">
-	<%= f.label :total %></div>
-    </div>
 
-      <div class="row no-gutter">
-	<div class="col-5">
-	  <%= f.select :producto_id, options_for_select(@productos, @vendido.producto_id), class: "form-control" %></div>
-	<div class="col">
-	  <%= f.text_field :precio, class: "form-control" %></div>
-	<div class="col">
-	  <%= f.text_field :cantidad, class: "form-control" %></div>
-	<div class="col">
-	  <%= f.text_field :total, class: "form-control" %></div>
-      </div>
-    </div>    
-  <div class="text-center">
-    <%= f.submit class: "btn btn-secondary"%>
-  </div>
+
+<table class="table">
+  <thead>
+    <th><%= form.label :producto_id %></th>
+    <th><%= form.label :precio%></th>
+    <th><%= form.label :cantidad %></th>
+    <th><%= form.label :total %></th>
+  </thead>
+  <tbody>
+    <tr>
+	    <td><%= form.select :producto_id, options_for_select(@productos, @vendido.producto_id), class: "form-control" %></td>
+	    <td><%= form.text_field :precio, class: "form-control" %></td>
+	    <td><%= form.text_field :cantidad, class: "form-control" %></td>
+	    <td><%= form.text_field :total, class: "form-control" %></td>
+    </tr>
+  <%= (@factura.detalles.count > 0) ? render(partial: 'vendidos', locals: {venta: @venta, show_actions: true }) : 'No hay detalles cargados' %>
+  </tbody>
+  </table>
 <% end %>
-  <div class="panel-body" id="vendidos">
-    <%= (@factura.detalles.count > 0) ? render(partial: 'vendidos', locals: {venta: @venta, show_actions: true }) : 'No hay detalles cargados' %>
-  </div>
+  
  <%= link_to "Nuevo detalle", new_vendido_path(transaccion_id: @factura.id), remote: true, class: "btn btn-info" %>

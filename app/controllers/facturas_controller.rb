@@ -8,7 +8,11 @@ class FacturasController < ApplicationController
     @vendido = Vendido.new(transaccion: @factura)
     @productos = productos_lista
   end
+  private
   def productos_lista
     Producto.order(:nombre).collect {|p| [p.nombre, {precio: p.precio}, p.id]}
   end  
+  def factura_params
+    params.require(:venta).permit(:objeto, vendido: [:producto_id, :precio, :cantidad, :total])
+  end
 end
