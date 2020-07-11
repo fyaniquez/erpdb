@@ -41,3 +41,4 @@
 <% end %>
   
  <%= link_to "Nuevo detalle", new_vendido_path(transaccion_id: @factura.id), remote: true, class: "btn btn-info" %>
+<%= javascript_pack_tag 'vendido'%>
