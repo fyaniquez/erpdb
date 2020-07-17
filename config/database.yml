@@ -18,7 +18,7 @@ default: &default
   adapter: postgresql
   encoding: unicode
   username: erp
-  password: erp123
+  password: el10culalu
   host: localhost
   # For details on connection pooling, see Rails configuration guide
   # https://guides.rubyonrails.org/configuring.html#database-pooling
@@ -85,6 +85,6 @@ production:
   <<: *default
   database: erpdata_production
   username: erp
-  password: erp123
+  password: el10culalu
   host: localhost
   password: <%= ENV['ERPDB_DATABASE_PASSWORD'] %>

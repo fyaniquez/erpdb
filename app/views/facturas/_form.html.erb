@@ -1,7 +1,8 @@
-<%= form_with(model: @factura, local: true) do |form| %>
+<%= form_with(url: "/facturas", model: @factura, local: true) do |form| %>
   <div class="actions text-right">
     <%= form.submit class: "btn btn-primary" %>
   </div>
+
   <% if @factura.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@factura.errors.count, "error") %> evitan que esta factura sea guardada</h2>
@@ -11,7 +12,7 @@
         <% end %>
       </ul>
     </div>
-    <% end %>
+  <% end %>
     
   <div class="form-group row">
     <%= form.label :objeto, class: "col-sm-2 col-form-label" %>
@@ -19,7 +20,6 @@
       <%= form.text_field :objeto, class: "form-control form-control-sm" %>
     </div>    
   </div>
-
 
 <table class="table">
   <thead>
@@ -40,5 +40,5 @@
   </table>
 <% end %>
   
- <%= link_to "Nuevo detalle", new_vendido_path(transaccion_id: @factura.id), remote: true, class: "btn btn-info" %>
+<%= link_to "Nuevo detalle", new_vendido_path(transaccion_id: @factura.id), remote: true, class: "btn btn-info" %>
 <%= javascript_pack_tag 'vendido'%>

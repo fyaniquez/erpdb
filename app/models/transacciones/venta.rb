@@ -1,2 +1,3 @@
 class Venta < Transaccion
+    
 end
