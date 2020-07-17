@@ -9,17 +9,20 @@ class FacturasController < ApplicationController
 
   # GET /facturas/1
   # GET /facturas/1.json
-  def show
+  def show 
   end
-  #GET /facturas/new
+
+  # GET /facturas/new
   def new
     factura_general
   end
+
   # GET /facturas/1/edit
   def edit
-    @factura = Venta.new(estado: "creando", usuario_id: current_user.id, almacen_id: 3, fecha: Date.today)
+    #@factura = Venta.new(estado: "creando", usuario_id: current_user.id, almacen_id: 3, fecha: Date.today)
     #@vendido = Vendido.new(transaccion_id: @factura.id)
-    @vendido = @factura.detalles.new
+    @items = @factura.detalles
+    @vendido = Vendido.new(transaccion_id: @factura.id)
     @productos = productos_lista
   end
   # POST /facturas
@@ -41,6 +44,7 @@ class FacturasController < ApplicationController
       end
     end
   end
+
   def update    
     respond_to do |format|
       if @factura.update()
@@ -52,16 +56,20 @@ class FacturasController < ApplicationController
       end
     end
   end
+
   private
     def set_factura
       @factura = Venta.find(params[:id])
     end
+
     def productos_lista
       Producto.order(:nombre).collect {|p| [p.nombre, {precio: p.precio}, p.id]}
     end  
+
     def factura_params
       params.require(:venta).permit(:objeto, :producto_id, :precio, :cantidad, :total)
     end
+
     def factura_general
       @factura = Venta.new(estado: "creando", usuario_id: current_user.id, almacen_id: 3, fecha: Date.today)
       #@vendido = Vendido.new(transaccion_id: @factura.id)

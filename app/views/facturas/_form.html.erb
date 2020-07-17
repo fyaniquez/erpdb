@@ -35,7 +35,18 @@
 	    <td><%= form.text_field :cantidad, class: "form-control" %></td>
 	    <td><%= form.text_field :total, class: "form-control" %></td>
     </tr>
-  <%= (@factura.detalles.count > 0) ? render(partial: 'vendidos', locals: {venta: @venta, show_actions: true }) : 'No hay detalles cargados' %>
+  <% total = 0.0 %>
+    <% @items.each do |v| %>
+    <tr>
+      <td><%= v.producto.nombre %></td>
+      <td><%= v.precio %></td>
+      <td><%= v.cantidad %></td>
+      <td><%= v.total %></td>
+      <td><%= link_to 'Show', v %></td>
+      <td><%= link_to 'Edit', edit_vendido_path(v) %></td>
+      <td><%= link_to 'Destroy', v, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+    </tr>
+    <% total += v.total; end %>
   </tbody>
   </table>
 <% end %>
